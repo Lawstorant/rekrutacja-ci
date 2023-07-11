@@ -5,8 +5,6 @@ ENVIRONMENT=""
 PRINCIPAL_SECRET=""
 NOLOGIN=false
 
-
-
 # detect parameters
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -62,7 +60,7 @@ fi
 # repository set as artifact
 # possibly, we would need to configure git here
 git clone git@github.com:Lawstorant/rekrutacja-function.git
-cd rekrutacja-function
+cd rekrutacja-function || exit 1
 if [[ $APPLICATION_VERSION != "devel" ]]; then
     git checkout "$APPLICATION_VERSION"
 fi
@@ -74,7 +72,7 @@ cd ..
 
 
 # login into azure with the configured service principal
-if [[ NOLOGIN != true ]]; then
+if [[ $NOLOGIN != true ]]; then
     source configure-env-variables.sh "$PRINCIPAL_SECRET"
     az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" --tenant "$ARM_TENANT_ID"
 fi
