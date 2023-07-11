@@ -67,7 +67,7 @@ fi
 
 # create a zip file of all the files in the repository
 # globbing pattern will exclude hidden ones
-zip -R ../function_app.zip *
+zip -R ../function_app.zip * .*
 cd ..
 
 
