@@ -79,6 +79,7 @@ if [[ NOLOGIN != true ]]; then
     az login --service-principal -u "$ARM_CLIENT_ID" -p "$ARM_CLIENT_SECRET" --tenant "$ARM_TENANT_ID"
 fi
 
+# I almost pulled all of my hair with this one
 az functionapp deployment source config-zip -g "rg-secretreader-$ENVIRONMENT" -n "sysadmins-secretreader-$ENVIRONMENT" --src function_app.zip --build-remote true
 
 rm -rf function_app.zip rekrutacja-function
